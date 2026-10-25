@@ -116,10 +116,56 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.background,
+        appBar: AppBar(
+          backgroundColor: AppColors.background,
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            tooltip: 'Yzyna',
+            icon: const Icon(Icons.arrow_back_rounded, size: 23),
+            color: AppColors.ink,
+          ),
+          title: Text(
+            _isEditing ? 'Amaly redaktirle' : 'Täze amal',
+            style: const TextStyle(
+              color: AppColors.ink,
+              fontSize: 19,
+              fontWeight: FontWeight.w700,
+              letterSpacing: -0.5,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: Material(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(14),
+                child: InkWell(
+                  onTap: _openCalculator,
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: AppColors.line),
+                    ),
+                    child: const Icon(
+                      Icons.calculate_outlined,
+                      color: AppColors.inkSoft,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+          centerTitle: false,
+          titleSpacing: 0,
+        ),
         body: SafeArea(
           child: Column(
             children: [
-              _buildHeader(),
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(20, 4, 20, 22),
@@ -155,55 +201,6 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 6, 12, 6),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            tooltip: 'Yzyna',
-            icon: const Icon(Icons.arrow_back_rounded, size: 23),
-            color: AppColors.ink,
-          ),
-          const SizedBox(width: 2),
-          Expanded(
-            child: Text(
-              _isEditing ? 'Amaly redaktirle' : 'Täze amal',
-              style: const TextStyle(
-                color: AppColors.ink,
-                fontSize: 19,
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.5,
-              ),
-            ),
-          ),
-          Material(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(14),
-            child: InkWell(
-              onTap: _openCalculator,
-              borderRadius: BorderRadius.circular(14),
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppColors.line),
-                ),
-                child: const Icon(
-                  Icons.calculate_outlined,
-                  color: AppColors.inkSoft,
-                  size: 20,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
