@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pul/app.dart';
 import 'package:pul/app_dependencies.dart';
 import 'package:pul/features/finance/data/backup/ledger_backup_codec.dart';
+import 'package:pul/features/finance/domain/entities/custom_transaction_category.dart';
 import 'package:pul/features/finance/domain/entities/transaction_category.dart';
 import 'package:pul/features/finance/domain/entities/transaction_type.dart';
 import 'package:pul/features/finance/presentation/pages/all_transactions_page.dart';
@@ -135,6 +137,51 @@ void main() {
     expect(find.text('Haýwanlar'), findsOneWidget);
   });
 
+  testWidgets('settings disables category actions while saving', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final repository = BlockingCategoryDeleteRepository();
+    repository.customCategories.add(
+      const CustomTransactionCategory(
+        id: 'pets',
+        label: 'Haýwanlar',
+        type: TransactionType.expense,
+        colorValue: 0xFF20A88A,
+        iconCodePoint: 0xE91D,
+      ),
+    );
+    await tester.pumpWidget(
+      PulApp(dependencies: AppDependencies.fromRepository(repository)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Poz'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Poz'));
+    await tester.pump();
+    await repository.deleteStarted.future;
+
+    final deleteButton = find.ancestor(
+      of: find.byTooltip('Poz'),
+      matching: find.byType(IconButton),
+    );
+    expect(tester.widget<IconButton>(deleteButton).onPressed, isNull);
+    expect(
+      tester.widget<ListTile>(find.widgetWithText(ListTile, 'Haýwanlar')).onTap,
+      isNull,
+    );
+
+    repository.deleteGate.complete();
+    await tester.pumpAndSettle();
+  });
+
   testWidgets('settings exports categories when the ledger is empty', (
     tester,
   ) async {
@@ -202,4 +249,16 @@ void main() {
     expect(await repository.isBalanceHidden(), isTrue);
     expect(find.text('•••••• TMT'), findsOneWidget);
   });
+}
+
+class BlockingCategoryDeleteRepository extends FakeFinanceRepository {
+  final deleteStarted = Completer<void>();
+  final deleteGate = Completer<void>();
+
+  @override
+  Future<void> deleteCustomCategory(String id) async {
+    deleteStarted.complete();
+    await deleteGate.future;
+    await super.deleteCustomCategory(id);
+  }
 }

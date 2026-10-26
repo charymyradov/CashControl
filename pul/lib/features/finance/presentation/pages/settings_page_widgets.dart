@@ -76,8 +76,8 @@ class _CustomCategoryTile extends StatelessWidget {
   });
 
   final CustomTransactionCategory category;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {

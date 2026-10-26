@@ -140,14 +140,18 @@ extension on SettingsPage {
                 if (index > 0) const Divider(indent: 70, height: 1),
                 _CustomCategoryTile(
                   category: state.customCategories[index],
-                  onEdit: () => _editCustomCategory(
-                    context,
-                    state.customCategories[index],
-                  ),
-                  onDelete: () => _confirmDeleteCustomCategory(
-                    context,
-                    state.customCategories[index],
-                  ),
+                  onEdit: state.isSaving
+                      ? null
+                      : () => _editCustomCategory(
+                          context,
+                          state.customCategories[index],
+                        ),
+                  onDelete: state.isSaving
+                      ? null
+                      : () => _confirmDeleteCustomCategory(
+                          context,
+                          state.customCategories[index],
+                        ),
                 ),
               ],
               if (state.customCategories.isNotEmpty)
