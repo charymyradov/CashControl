@@ -154,8 +154,8 @@ class SettingsPage extends StatelessWidget {
     List<MoneyTransaction> transactions,
     List<CustomTransactionCategory> customCategories,
   ) async {
-    if (transactions.isEmpty) {
-      _showMessage(context, 'Ätiýaçlyk üçin amal ýok.');
+    if (transactions.isEmpty && customCategories.isEmpty) {
+      _showMessage(context, 'Ätiýaçlyk üçin amal ýa-da kategoriýa ýok.');
       return;
     }
 

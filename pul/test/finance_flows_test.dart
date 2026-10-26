@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pul/app.dart';
 import 'package:pul/app_dependencies.dart';
+import 'package:pul/features/finance/data/backup/ledger_backup_codec.dart';
 import 'package:pul/features/finance/domain/entities/transaction_category.dart';
+import 'package:pul/features/finance/domain/entities/transaction_type.dart';
 import 'package:pul/features/finance/presentation/pages/all_transactions_page.dart';
 
 import 'support/fake_finance_repository.dart';
@@ -128,6 +133,53 @@ void main() {
     expect(repository.customCategories, hasLength(1));
     expect(repository.customCategories.single.label, 'Haýwanlar');
     expect(find.text('Haýwanlar'), findsOneWidget);
+  });
+
+  testWidgets('settings exports categories when the ledger is empty', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    String? clipboardText;
+    final messenger = TestDefaultBinaryMessengerBinding.instance
+        .defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+      if (call.method == 'Clipboard.setData') {
+        clipboardText = (call.arguments as Map<Object?, Object?>)['text']
+            as String;
+      }
+      return null;
+    });
+    addTearDown(
+      () => messenger.setMockMethodCallHandler(SystemChannels.platform, null),
+    );
+
+    final repository = FakeFinanceRepository(transactions: const []);
+    await tester.pumpWidget(
+      PulApp(dependencies: AppDependencies.fromRepository(repository)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Täze kategoriýa goş'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextFormField), 'Haýwanlar');
+    await tester.tap(find.text('Ýatda sakla'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Çyktary klipboarda kopyala'));
+    await tester.pumpAndSettle();
+
+    expect(clipboardText, isNotNull);
+    expect(LedgerBackupCodec.decode(clipboardText!), isEmpty);
+    expect(
+      LedgerBackupCodec.decodeCustomCategories(clipboardText!)!.single.type,
+      TransactionType.expense,
+    );
+    expect(jsonDecode(clipboardText!)['customCategories'], hasLength(1));
   });
 
   testWidgets('balance can be hidden', (tester) async {

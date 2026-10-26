@@ -291,7 +291,7 @@ extension on SettingsPage {
                   ),
                 ),
                 subtitle: const Text(
-                  'Ähli amallaryňyz JSON görnüşinde ätiýaçlyk saklamak üçin',
+                  'Amallar we kategoriýalar JSON görnüşinde ätiýaçlyk saklamak üçin',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 11.5,
