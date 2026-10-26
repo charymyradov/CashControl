@@ -17,10 +17,10 @@ void main() {
 
   test('formats dates and months', () {
     final date = DateTime(2026, 10, 21);
-    expect(formatDate(date), '21 Okt 2026');
-    expect(formatMonthAndYear(date), 'Oktýabr 2026');
-    expect(formatTransactionDate(date, now: DateTime(2026, 10, 21)), 'Bu gün');
+    expect(formatDate(date), '21 Ekim 2026');
+    expect(formatMonthAndYear(date), 'Ekim 2026');
+    expect(formatTransactionDate(date, now: DateTime(2026, 10, 21)), 'Bugün');
     expect(formatTransactionDate(DateTime(2026, 10, 20), now: date), 'Dün');
-    expect(formatTransactionDate(DateTime(2026, 10, 19), now: date), '19 Okt');
+    expect(formatTransactionDate(DateTime(2026, 10, 19), now: date), '19 Ekim');
   });
 }
