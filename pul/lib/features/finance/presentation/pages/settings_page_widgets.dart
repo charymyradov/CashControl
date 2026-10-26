@@ -250,28 +250,33 @@ class _CustomCategoryDialogState extends State<_CustomCategoryDialog> {
                 runSpacing: 8,
                 children: [
                   for (final color in _colors)
-                    GestureDetector(
-                      onTap: () => setState(() => _color = color),
-                      child: Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          color: color,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: _color == color
-                                ? AppColors.ink
-                                : Colors.transparent,
-                            width: 2,
+                    Semantics(
+                      label: 'Reňk ${_colors.indexOf(color) + 1}',
+                      selected: _color == color,
+                      child: InkWell(
+                        onTap: () => setState(() => _color = color),
+                        customBorder: const CircleBorder(),
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: color,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: _color == color
+                                  ? AppColors.ink
+                                  : Colors.transparent,
+                              width: 2,
+                            ),
                           ),
+                          child: _color == color
+                              ? const Icon(
+                                  Icons.check_rounded,
+                                  color: Colors.white,
+                                  size: 18,
+                                )
+                              : null,
                         ),
-                        child: _color == color
-                            ? const Icon(
-                                Icons.check_rounded,
-                                color: Colors.white,
-                                size: 18,
-                              )
-                            : null,
                       ),
                     ),
                 ],
@@ -291,24 +296,28 @@ class _CustomCategoryDialogState extends State<_CustomCategoryDialog> {
                 runSpacing: 8,
                 children: [
                   for (final icon in _icons)
-                    InkWell(
-                      onTap: () => setState(() => _icon = icon),
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        width: 38,
-                        height: 38,
-                        decoration: BoxDecoration(
-                          color: _icon.codePoint == icon.codePoint
-                              ? _color.withValues(alpha: 0.14)
-                              : AppColors.surfaceMuted,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Icon(
-                          icon,
-                          size: 19,
-                          color: _icon.codePoint == icon.codePoint
-                              ? _color
-                              : AppColors.textSecondary,
+                    Semantics(
+                      label: 'Simge ${_icons.indexOf(icon) + 1}',
+                      selected: _icon.codePoint == icon.codePoint,
+                      child: InkWell(
+                        onTap: () => setState(() => _icon = icon),
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          width: 38,
+                          height: 38,
+                          decoration: BoxDecoration(
+                            color: _icon.codePoint == icon.codePoint
+                                ? _color.withValues(alpha: 0.14)
+                                : AppColors.surfaceMuted,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(
+                            icon,
+                            size: 19,
+                            color: _icon.codePoint == icon.codePoint
+                                ? _color
+                                : AppColors.textSecondary,
+                          ),
                         ),
                       ),
                     ),

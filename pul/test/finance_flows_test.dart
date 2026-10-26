@@ -128,12 +128,24 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Täze kategoriýa goş'));
     await tester.pumpAndSettle();
+    final semantics = tester.ensureSemantics();
+    await tester.tap(find.bySemanticsLabel('Reňk 2'));
+    await tester.tap(find.bySemanticsLabel('Simge 2'));
+    semantics.dispose();
     await tester.enterText(find.byType(TextFormField), 'Haýwanlar');
     await tester.tap(find.text('Ýatda sakla'));
     await tester.pumpAndSettle();
 
     expect(repository.customCategories, hasLength(1));
     expect(repository.customCategories.single.label, 'Haýwanlar');
+    expect(
+      repository.customCategories.single.colorValue,
+      const Color(0xFF3A8FD8).toARGB32(),
+    );
+    expect(
+      repository.customCategories.single.iconCodePoint,
+      Icons.directions_bus_rounded.codePoint,
+    );
     expect(find.text('Haýwanlar'), findsOneWidget);
   });
 
