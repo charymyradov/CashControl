@@ -95,6 +95,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildContent(BuildContext context, FinanceState state) {
     return ListView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(20, 4, 20, 80),
       children: [
         _Header(
