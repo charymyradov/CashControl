@@ -186,12 +186,14 @@ class _DashboardPageState extends State<DashboardPage> {
     );
 
     context.read<FinanceBloc>().add(TransactionSaved(transaction));
+    HapticFeedback.lightImpact();
 
     final displayLabel = iconName?.label ?? category.label;
     AppToast.show(
       context,
       message: '$displayLabel • ${formatMoney(amount)} goşuldy',
       icon: Icons.check_circle_rounded,
+      duration: const Duration(seconds: 4),
       actionLabel: 'Redaktirle',
       onAction: () => _edit(context, transaction),
     );
