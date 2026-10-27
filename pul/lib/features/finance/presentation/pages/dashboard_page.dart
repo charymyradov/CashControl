@@ -310,10 +310,13 @@ class _Header extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: AppColors.line),
               ),
-              child: const Icon(
-                Icons.settings_outlined,
-                color: AppColors.inkSoft,
-                size: 20,
+              child: const Tooltip(
+                message: 'Sazlamalar',
+                child: Icon(
+                  Icons.settings_outlined,
+                  color: AppColors.inkSoft,
+                  size: 20,
+                ),
               ),
             ),
           ),
