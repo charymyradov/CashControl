@@ -421,7 +421,10 @@ class _ErrorView extends StatelessWidget {
             ),
             const SizedBox(height: 18),
             FilledButton(
-              onPressed: onRetry,
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                onRetry();
+              },
               style: FilledButton.styleFrom(minimumSize: const Size(150, 46)),
               child: const Text('Täzeden synanyş'),
             ),
