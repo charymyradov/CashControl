@@ -41,7 +41,10 @@ class _DashboardPageState extends State<DashboardPage> {
           backgroundColor: AppColors.background,
           floatingActionButton: state.isReady
               ? FloatingActionButton(
-                  onPressed: () => _openAdd(context),
+                  onPressed: () {
+                    HapticFeedback.mediumImpact();
+                    _openAdd(context);
+                  },
                   tooltip: 'Amal goş',
                   backgroundColor: AppColors.green,
                   foregroundColor: Colors.white,
