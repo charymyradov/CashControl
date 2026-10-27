@@ -268,11 +268,11 @@ class _Header extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        const Expanded(
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Pullarym',
                 style: TextStyle(
                   color: AppColors.ink,
@@ -282,10 +282,10 @@ class _Header extends StatelessWidget {
                   height: 1.15,
                 ),
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
-                'Şahsy pul dolandyryşy',
-                style: TextStyle(
+                formatMonthAndYear(DateTime.now()),
+                style: const TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 10.5,
                   fontWeight: FontWeight.w500,
