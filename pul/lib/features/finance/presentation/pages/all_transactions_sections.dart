@@ -17,6 +17,7 @@ extension on _AllTransactionsPageState {
       final days = groups.keys.toList()..sort((a, b) => b.compareTo(a));
 
       return ListView(
+        physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.fromLTRB(20, 0, 20, widget.embedded ? 28 : 110),
         children: [
           const _SwipeHint(),
