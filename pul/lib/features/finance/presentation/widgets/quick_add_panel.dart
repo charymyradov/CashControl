@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/formatters.dart';
@@ -94,7 +95,10 @@ class _QuickAddPanelState extends State<QuickAddPanel> {
                   child: _AmountButton(
                     amount: amount,
                     isSelected: selected == amount,
-                    onTap: () => setState(() => _selectedAmount = amount),
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      setState(() => _selectedAmount = amount);
+                    },
                   ),
                 ),
                 if (amount != QuickAddPanel.amounts[3])
@@ -110,7 +114,10 @@ class _QuickAddPanelState extends State<QuickAddPanel> {
                   child: _AmountButton(
                     amount: amount,
                     isSelected: selected == amount,
-                    onTap: () => setState(() => _selectedAmount = amount),
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      setState(() => _selectedAmount = amount);
+                    },
                   ),
                 ),
                 if (amount != QuickAddPanel.amounts.last)
