@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/entities/transaction_category.dart';
@@ -160,7 +161,10 @@ class EmptyTransactionsCard extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           TextButton(
-            onPressed: onAdd,
+            onPressed: () {
+              HapticFeedback.lightImpact();
+              onAdd();
+            },
             style: TextButton.styleFrom(
               foregroundColor: AppColors.greenDark,
               textStyle: const TextStyle(
