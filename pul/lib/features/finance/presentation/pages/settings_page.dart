@@ -38,6 +38,7 @@ class SettingsPage extends StatelessWidget {
           title: const Text('Sazlamalar'),
           leading: IconButton(
             onPressed: () => Navigator.of(context).pop(),
+            tooltip: 'Yzyna',
             icon: const Icon(Icons.arrow_back_rounded, size: 23),
           ),
         ),
