@@ -8,13 +8,11 @@ internet, hasap ýa-da bulut synhronizasiýasy gerek däl.
 
 - **Boş ledger bilen başlaýar** — programma hiç haçan nusgalyk (demo)
   maglumat goşmaýar. Ilkinji amaly özüňiz goşýarsyňyz.
-- **Bir setirde jemi balans** — çepde «Jemi balans», sagda üst üste
-  «Girdeji» we «Çykdajy» öýjükleri. Ähli öýjükler biri-birine deň
-  giňlikde we sanlar biri-birine deň ölçegde.
-- **Çalt goş** — tegelek ýuvarlatylan düwmeler (0,5 / 1 / 5 / 10 / 15 / 20 /
+- **Bir setirde jemi balans** 
+- **Çalt goş** — tegelek düwmeler (0,5 / 1 / 5 / 10 / 15 / 20 /
   50) bilen mukdary, aşakyndaky kategoriýalar bilen ýerini saýlap, iki
   basyş bilen çykdajyny ýazyp bilersiňiz.
-- **Girdeji / çykdajy yzarlamak** — kategoriýalar, bellikler we senalar
+- **Girdeji / çykdajy yzarlamak** — kategoriýalar, bellikler we seneler
   bilen.
 - **Aýlyk statistika** — bu aý, geçen aý we 3 aýlyk çykdajy paýlaşylyşy.
 - **Giňeldilen hasabat** — soňky 6 aýyň grafikasy, öňki döwür bilen
@@ -23,8 +21,7 @@ internet, hasap ýa-da bulut synhronizasiýasy gerek däl.
   kategoriýasyny goşup, üýtgedip we pozup bilersiňiz.
 - **Göni baş sahypa** — programma açylanda onboarding däl-de, esasy ekran
   görkezilýär.
-- **Öz hasaplaýjy** — goşmak, aýyrmak, köpeltmek, bölmek we kazalara
-  bilen hasaplama.
+- **Öz hasaplaýjy** — goşmak, aýyrmak, köpeltmek, bölmek.
 - **Balansy gizlemek** — ekranyň önünde balans görünmeli däl.
 - **Ätiýaçlyk** — ähli amallaryňyzy klipboarda kopyalap, soňra gaýtadan
   getirip bilersiňiz (JSON).
