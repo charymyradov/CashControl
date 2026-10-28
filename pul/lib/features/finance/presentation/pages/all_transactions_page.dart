@@ -244,7 +244,10 @@ class _AllTransactionsPageState extends State<AllTransactionsPage> {
             child: const Text('Ýatyr'),
           ),
           FilledButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
+            onPressed: () {
+              HapticFeedback.mediumImpact();
+              Navigator.of(dialogContext).pop(true);
+            },
             style: FilledButton.styleFrom(
               backgroundColor: AppColors.coral,
               minimumSize: const Size(92, 44),
