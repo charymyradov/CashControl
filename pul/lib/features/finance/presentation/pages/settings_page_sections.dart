@@ -3,6 +3,7 @@ part of 'settings_page.dart';
 extension on SettingsPage {
   Widget _buildSettingsList(BuildContext context, FinanceState state) {
     return ListView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(20, 6, 20, 32),
       children: [
         SurfaceCard(
