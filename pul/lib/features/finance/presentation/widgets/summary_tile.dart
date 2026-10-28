@@ -72,7 +72,7 @@ class SummaryTile extends StatelessWidget {
               fit: BoxFit.scaleDown,
               alignment: Alignment.centerLeft,
               child: Text(
-                isHidden ? '•••• tmt' : amount,
+                isHidden ? '•••• TMT' : amount,
                 maxLines: 1,
                 style: TextStyle(
                   color: color,
