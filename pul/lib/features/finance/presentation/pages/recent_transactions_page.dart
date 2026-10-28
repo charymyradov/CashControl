@@ -47,6 +47,7 @@ class RecentTransactionsView extends StatelessWidget {
           }
 
           return ListView(
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
             children: [
               SurfaceCard(
