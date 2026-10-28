@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/calculator_engine.dart';
@@ -310,7 +311,10 @@ class _CalcKey extends StatelessWidget {
             color: isOperator ? AppColors.greenSoft : background,
             borderRadius: BorderRadius.circular(15),
             child: InkWell(
-              onTap: onTap,
+              onTap: () {
+                HapticFeedback.selectionClick();
+                onTap();
+              },
               borderRadius: BorderRadius.circular(15),
               child: Center(
                 child: icon != null
