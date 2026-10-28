@@ -113,9 +113,12 @@ class _DashboardPageState extends State<DashboardPage> {
                 balance: state.totalBalance,
                 monthNet: state.monthlyNet,
                 isHidden: state.isBalanceHidden,
-                onToggleVisibility: () => context.read<FinanceBloc>().add(
-                  const BalanceVisibilityToggled(),
-                ),
+                onToggleVisibility: () {
+                  HapticFeedback.lightImpact();
+                  context.read<FinanceBloc>().add(
+                    const BalanceVisibilityToggled(),
+                  );
+                },
               ),
             ),
             const SizedBox(width: 12),
