@@ -95,6 +95,7 @@ class _SpendingOverviewCardState extends State<SpendingOverviewCard> {
               PopupMenuButton<SpendingPeriod>(
                 initialValue: _period,
                 onSelected: (period) => setState(() => _period = period),
+                tooltip: 'Döwür saýla',
                 color: AppColors.surface,
                 surfaceTintColor: Colors.transparent,
                 elevation: 8,
