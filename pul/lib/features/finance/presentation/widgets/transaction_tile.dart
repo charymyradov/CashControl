@@ -34,78 +34,82 @@ class TransactionTile extends StatelessWidget {
         ? '•••• TMT'
         : '$amountPrefix${formatMoney(transaction.amount)}';
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        onLongPress: onLongPress,
-        borderRadius: BorderRadius.circular(16),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 11),
-          child: Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: categoryColor.withValues(alpha: 0.13),
-                  shape: BoxShape.circle,
+    return Semantics(
+      button: onTap != null,
+      label: '${transaction.title}, $amountLabel',
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          onLongPress: onLongPress,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 11),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: categoryColor.withValues(alpha: 0.13),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(categoryIcon, color: categoryColor, size: 21),
                 ),
-                child: Icon(categoryIcon, color: categoryColor, size: 21),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        transaction.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppColors.ink,
+                          fontSize: 14.5,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.15,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        formatTransactionDate(transaction.date),
+                        style: const TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      transaction.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AppColors.ink,
+                      amountLabel,
+                      style: TextStyle(
+                        color: amountColor,
                         fontSize: 14.5,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: -0.15,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: -0.35,
                       ),
                     ),
-                    const SizedBox(height: 3),
-                    Text(
-                      formatTransactionDate(transaction.date),
-                      style: const TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w400,
+                    if (showChevron) ...[
+                      const SizedBox(height: 4),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        size: 16,
+                        color: AppColors.textTertiary,
                       ),
-                    ),
+                    ],
                   ],
                 ),
-              ),
-              const SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    amountLabel,
-                    style: TextStyle(
-                      color: amountColor,
-                      fontSize: 14.5,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -0.35,
-                    ),
-                  ),
-                  if (showChevron) ...[
-                    const SizedBox(height: 4),
-                    const Icon(
-                      Icons.chevron_right_rounded,
-                      size: 16,
-                      color: AppColors.textTertiary,
-                    ),
-                  ],
-                ],
-              ),
-              if (trailing != null) ...[const SizedBox(width: 2), trailing!],
-            ],
+                if (trailing != null) ...[const SizedBox(width: 2), trailing!],
+              ],
+            ),
           ),
         ),
       ),
