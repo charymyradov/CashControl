@@ -94,78 +94,86 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildContent(BuildContext context, FinanceState state) {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(20, 4, 20, 80),
-      children: [
-        _Header(
-          onSettings: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => const SettingsPage()));
-          },
-        ),
-        const SizedBox(height: 14),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: BalanceCard(
-                balance: state.totalBalance,
-                monthNet: state.monthlyNet,
-                isHidden: state.isBalanceHidden,
-                onToggleVisibility: () {
-                  HapticFeedback.lightImpact();
-                  context.read<FinanceBloc>().add(
-                    const BalanceVisibilityToggled(),
-                  );
-                },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _Header(
+            onSettings: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const SettingsPage()));
+            },
+          ),
+          const SizedBox(height: 14),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: BalanceCard(
+                  balance: state.totalBalance,
+                  monthNet: state.monthlyNet,
+                  isHidden: state.isBalanceHidden,
+                  onToggleVisibility: () {
+                    HapticFeedback.lightImpact();
+                    context.read<FinanceBloc>().add(
+                      const BalanceVisibilityToggled(),
+                    );
+                  },
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(
-                    height: (BalanceCard.height - 12) / 2,
-                    child: SummaryTile(
-                      label: 'Girdeji',
-                      amount: '+${formatMoney(state.monthlyIncome)}',
-                      icon: Icons.arrow_upward_rounded,
-                      color: AppColors.greenDark,
-                      iconColor: AppColors.green,
-                      background: AppColors.greenSoft,
-                      borderColor: const Color(0xFFD8F2E6),
-                      isHidden: state.isBalanceHidden,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: (BalanceCard.height - 12) / 2,
+                      child: SummaryTile(
+                        label: 'Girdeji',
+                        amount: '+${formatMoney(state.monthlyIncome)}',
+                        icon: Icons.arrow_upward_rounded,
+                        color: AppColors.greenDark,
+                        iconColor: AppColors.green,
+                        background: AppColors.greenSoft,
+                        borderColor: const Color(0xFFD8F2E6),
+                        isHidden: state.isBalanceHidden,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    height: (BalanceCard.height - 12) / 2,
-                    child: SummaryTile(
-                      label: 'Çykdajy',
-                      amount: '−${formatMoney(state.monthlyExpense)}',
-                      icon: Icons.arrow_downward_rounded,
-                      color: AppColors.coralDark,
-                      iconColor: AppColors.coral,
-                      background: AppColors.coralSoft,
-                      borderColor: const Color(0xFFF9DDD8),
-                      isHidden: state.isBalanceHidden,
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      height: (BalanceCard.height - 12) / 2,
+                      child: SummaryTile(
+                        label: 'Çykdajy',
+                        amount: '−${formatMoney(state.monthlyExpense)}',
+                        icon: Icons.arrow_downward_rounded,
+                        color: AppColors.coralDark,
+                        iconColor: AppColors.coral,
+                        background: AppColors.coralSoft,
+                        borderColor: const Color(0xFFF9DDD8),
+                        isHidden: state.isBalanceHidden,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          QuickAddPanel(
+            onQuickAdd: (amount, category, iconName) => _quickAdd(
+              context,
+              amount: amount,
+              category: category,
+              iconName: iconName,
             ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        QuickAddPanel(
-          onQuickAdd: (amount, category, iconName) =>
-              _quickAdd(context, amount: amount, category: category, iconName: iconName),
-        ),
-        const SizedBox(height: 14),
-        SpendingOverviewCard(state: state),
-      ],
+          ),
+          const SizedBox(height: 14),
+          SpendingOverviewCard(state: state),
+        ],
+      ),
     );
   }
 

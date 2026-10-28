@@ -220,6 +220,7 @@ void main() {
     final dashboardScroll = tester.state<ScrollableState>(
       find.byType(Scrollable).first,
     );
+    expect(dashboardScroll.position.physics, isA<ClampingScrollPhysics>());
     expect(dashboardScroll.position.maxScrollExtent, lessThan(320));
   });
 

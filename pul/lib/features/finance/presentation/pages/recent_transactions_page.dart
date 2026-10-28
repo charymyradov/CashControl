@@ -46,64 +46,67 @@ class RecentTransactionsView extends StatelessWidget {
             );
           }
 
-          return ListView(
+          return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-            children: [
-              SurfaceCard(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 3,
-                ),
-                child: Column(
-                  children: [
-                    for (
-                      var index = 0;
-                      index < state.recentTransactions.length;
-                      index++
-                    ) ...[
-                      TransactionTile(
-                        transaction: state.recentTransactions[index],
-                        isBalanceHidden: state.isBalanceHidden,
-                        onTap: () =>
-                            _edit(context, state.recentTransactions[index]),
-                      ),
-                      if (index < state.recentTransactions.length - 1)
-                        const Divider(indent: 56),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SurfaceCard(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 3,
+                  ),
+                  child: Column(
+                    children: [
+                      for (
+                        var index = 0;
+                        index < state.recentTransactions.length;
+                        index++
+                      ) ...[
+                        TransactionTile(
+                          transaction: state.recentTransactions[index],
+                          isBalanceHidden: state.isBalanceHidden,
+                          onTap: () =>
+                              _edit(context, state.recentTransactions[index]),
+                        ),
+                        if (index < state.recentTransactions.length - 1)
+                          const Divider(indent: 56),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 14),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const AllTransactionsPage(),
+                const SizedBox(height: 14),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const AllTransactionsPage(),
+                        ),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.textSecondary,
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      minimumSize: const Size(0, 36),
+                      textStyle: const TextStyle(
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w600,
                       ),
-                    );
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: AppColors.textSecondary,
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
-                    minimumSize: const Size(0, 36),
-                    textStyle: const TextStyle(
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w600,
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Ählisini gör'),
+                        SizedBox(width: 3),
+                        Icon(Icons.chevron_right_rounded, size: 18),
+                      ],
                     ),
                   ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('Ählisini gör'),
-                      SizedBox(width: 3),
-                      Icon(Icons.chevron_right_rounded, size: 18),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
