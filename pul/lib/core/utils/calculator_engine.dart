@@ -1,5 +1,3 @@
-/// A deliberately small arithmetic evaluator used by the in-app calculator.
-/// It supports +, −, ×, ÷, decimal commas and parentheses.
 double? evaluateExpression(String expression) {
   var normalized = expression
       .replaceAll('×', '*')
@@ -10,7 +8,6 @@ double? evaluateExpression(String expression) {
 
   if (normalized.isEmpty) return null;
 
-  // A trailing operator is useful while typing, but there is nothing to solve.
   if (RegExp(r'[+\-*/.]$').hasMatch(normalized)) return null;
 
   final parser = _ExpressionParser(normalized);
