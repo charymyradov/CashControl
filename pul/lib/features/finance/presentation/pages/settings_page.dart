@@ -59,7 +59,7 @@ class SettingsPage extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
         title: const Text(
-          'Ähli amallary öçürmek isleseňiziz?',
+          'Ähli amallary öçürmek isleseňiz?',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
