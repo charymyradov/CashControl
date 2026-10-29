@@ -101,78 +101,84 @@ class _AppToastState extends State<_AppToast>
       left: 0,
       right: 0,
       bottom: media.padding.bottom + 88,
-      child: FadeTransition(
-        opacity: _controller,
-        child: SlideTransition(
-          position:
-              Tween<Offset>(
-                begin: const Offset(0, 0.35),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: _controller,
-                  curve: Curves.easeOutCubic,
-                ),
-              ),
-          child: Material(
-            type: MaterialType.transparency,
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: media.size.width - 32),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  padding: const EdgeInsets.fromLTRB(14, 10, 8, 10),
-                  decoration: BoxDecoration(
-                    color: AppColors.ink,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x2E17222C),
-                        blurRadius: 22,
-                        offset: Offset(0, 8),
-                      ),
-                    ],
+      child: Semantics(
+        liveRegion: true,
+        container: true,
+        child: FadeTransition(
+          opacity: _controller,
+          child: SlideTransition(
+            position:
+                Tween<Offset>(
+                  begin: const Offset(0, 0.35),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(
+                    parent: _controller,
+                    curve: Curves.easeOutCubic,
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (widget.icon != null) ...[
-                        Icon(widget.icon, color: Colors.white70, size: 18),
-                        const SizedBox(width: 9),
-                      ],
-                      Flexible(
-                        child: Text(
-                          widget.message,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            height: 1.25,
-                            decoration: TextDecoration.none,
-                          ),
+                ),
+            child: Material(
+              type: MaterialType.transparency,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: media.size.width - 32),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.fromLTRB(14, 10, 8, 10),
+                    decoration: BoxDecoration(
+                      color: AppColors.ink,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x2E17222C),
+                          blurRadius: 22,
+                          offset: Offset(0, 8),
                         ),
-                      ),
-                      if (widget.actionLabel != null) ...[
-                        const SizedBox(width: 10),
-                        TextButton(
-                          onPressed: () {
-                            _close();
-                            widget.onAction?.call();
-                          },
-                          style: TextButton.styleFrom(
-                            foregroundColor: AppColors.green,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            minimumSize: const Size(0, 34),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            textStyle: const TextStyle(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w700,
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (widget.icon != null) ...[
+                          Icon(widget.icon, color: Colors.white70, size: 18),
+                          const SizedBox(width: 9),
+                        ],
+                        Flexible(
+                          child: Text(
+                            widget.message,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              height: 1.25,
+                              decoration: TextDecoration.none,
                             ),
                           ),
-                          child: Text(widget.actionLabel!),
                         ),
+                        if (widget.actionLabel != null) ...[
+                          const SizedBox(width: 10),
+                          TextButton(
+                            onPressed: () {
+                              _close();
+                              widget.onAction?.call();
+                            },
+                            style: TextButton.styleFrom(
+                              foregroundColor: AppColors.green,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              minimumSize: const Size(0, 34),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              textStyle: const TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            child: Text(widget.actionLabel!),
+                          ),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
                 ),
               ),
