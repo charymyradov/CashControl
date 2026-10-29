@@ -175,15 +175,7 @@ class _DayHeader extends StatelessWidget {
   final double expense;
   final bool isBalanceHidden;
 
-  String get _label {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final difference = today.difference(date).inDays;
-    if (difference == 0) return 'Bu gün';
-    if (difference == 1) return 'Düýn';
-    final base = '${date.day} ${shortMonth(date)}';
-    return date.year == now.year ? base : '$base ${date.year}';
-  }
+  String get _label => formatTransactionDate(date);
 
   @override
   Widget build(BuildContext context) {
