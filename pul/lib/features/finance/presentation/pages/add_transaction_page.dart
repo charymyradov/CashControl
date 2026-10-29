@@ -143,20 +143,23 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               child: Material(
                 color: AppColors.surface,
                 borderRadius: BorderRadius.circular(14),
-                child: InkWell(
-                  onTap: _openCalculator,
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: AppColors.line),
-                    ),
-                    child: const Icon(
-                      Icons.calculate_outlined,
-                      color: AppColors.inkSoft,
-                      size: 20,
+                child: Tooltip(
+                  message: 'Hasaplaýjy',
+                  child: InkWell(
+                    onTap: _openCalculator,
+                    borderRadius: BorderRadius.circular(14),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: AppColors.line),
+                      ),
+                      child: const Icon(
+                        Icons.calculate_outlined,
+                        color: AppColors.inkSoft,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
