@@ -40,7 +40,7 @@ class AppBottomNav extends StatelessWidget {
               Expanded(
                 child: _NavItem(
                   icon: Icons.home_rounded,
-                  label: 'Home',
+                  label: 'Baş sahypa',
                   isSelected: currentIndex == 0,
                   onTap: onHome,
                 ),
