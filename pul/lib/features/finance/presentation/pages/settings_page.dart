@@ -128,18 +128,43 @@ class SettingsPage extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Kategoriýany pozmalymy?'),
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+        title: const Text(
+          'Kategoriýany pozmalymy?',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.3,
+          ),
+        ),
         content: Text(
           '"${category.label}" täze amallarda ulanylyp bilinmez. '
           'Öňki amallar üýtgemez.',
+          style: const TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 13.5,
+            height: 1.45,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(false),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.textSecondary,
+            ),
             child: const Text('Ýatyr'),
           ),
           FilledButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
+            onPressed: () {
+              HapticFeedback.mediumImpact();
+              Navigator.of(dialogContext).pop(true);
+            },
+            style: FilledButton.styleFrom(
+              backgroundColor: AppColors.coral,
+              minimumSize: const Size(92, 44),
+            ),
             child: const Text('Poz'),
           ),
         ],

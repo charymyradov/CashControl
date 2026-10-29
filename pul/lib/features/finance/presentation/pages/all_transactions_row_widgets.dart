@@ -14,12 +14,14 @@ class _FilterBar extends StatelessWidget {
   int _countOf(_TransactionFilter filter) {
     return switch (filter) {
       _TransactionFilter.all => state.transactions.length,
-      _TransactionFilter.income => state.transactions
-          .where((item) => item.type == TransactionType.income)
-          .length,
-      _TransactionFilter.expense => state.transactions
-          .where((item) => item.type == TransactionType.expense)
-          .length,
+      _TransactionFilter.income =>
+        state.transactions
+            .where((item) => item.type == TransactionType.income)
+            .length,
+      _TransactionFilter.expense =>
+        state.transactions
+            .where((item) => item.type == TransactionType.expense)
+            .length,
     };
   }
 
@@ -138,11 +140,7 @@ class _SwipeHint extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(4, 2, 4, 4),
       child: Row(
         children: [
-          Icon(
-            Icons.swipe_rounded,
-            size: 13,
-            color: AppColors.textTertiary,
-          ),
+          Icon(Icons.swipe_rounded, size: 13, color: AppColors.textTertiary),
           SizedBox(width: 6),
           Flexible(
             child: Text(
@@ -195,25 +193,39 @@ class _DayHeader extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(4, 12, 4, 8),
       child: Row(
         children: [
-          Text(
-            _label,
-            style: const TextStyle(
-              color: AppColors.ink,
-              fontSize: 14.5,
-              fontWeight: FontWeight.w700,
-              letterSpacing: -0.2,
+          Expanded(
+            child: Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    _label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: AppColors.ink,
+                      fontSize: 14.5,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.2,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 7),
+                Flexible(
+                  child: Text(
+                    _weekDays[date.weekday - 1],
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(width: 7),
-          Text(
-            _weekDays[date.weekday - 1],
-            style: const TextStyle(
-              color: AppColors.textSecondary,
-              fontSize: 10.5,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const Spacer(),
+          const SizedBox(width: 8),
           Text(
             netLabel,
             style: TextStyle(
