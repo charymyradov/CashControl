@@ -90,6 +90,7 @@ class _AllTransactionsPageState extends State<AllTransactionsPage> {
             ? null
             : FloatingActionButton(
                 onPressed: () => _openAdd(context),
+                tooltip: 'Amal goş',
                 backgroundColor: AppColors.green,
                 foregroundColor: Colors.white,
                 elevation: 3,
