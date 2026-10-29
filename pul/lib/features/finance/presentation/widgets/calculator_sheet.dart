@@ -86,6 +86,7 @@ class _CalculatorSheetState extends State<_CalculatorSheet> {
                 ),
                 IconButton(
                   onPressed: () => Navigator.of(context).pop(),
+                  tooltip: 'Ýatyr',
                   style: IconButton.styleFrom(
                     backgroundColor: AppColors.surfaceMuted,
                     foregroundColor: AppColors.ink,
