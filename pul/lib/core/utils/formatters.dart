@@ -73,7 +73,7 @@ String formatTransactionDate(DateTime date, {DateTime? now}) {
   final difference = thisDay.difference(thatDay).inDays;
 
   if (difference == 0) return 'Bu gün';
-  if (difference == 1) return 'Dün';
+  if (difference == 1) return 'Düýn';
   if (date.year == today.year) {
     return '${date.day} ${shortMonth(date)}';
   }

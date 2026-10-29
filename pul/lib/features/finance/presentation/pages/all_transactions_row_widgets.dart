@@ -180,7 +180,7 @@ class _DayHeader extends StatelessWidget {
     final today = DateTime(now.year, now.month, now.day);
     final difference = today.difference(date).inDays;
     if (difference == 0) return 'Bu gün';
-    if (difference == 1) return 'Dün';
+    if (difference == 1) return 'Düýn';
     final base = '${date.day} ${shortMonth(date)}';
     return date.year == now.year ? base : '$base ${date.year}';
   }
